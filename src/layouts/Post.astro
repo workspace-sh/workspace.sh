@@ -1,0 +1,25 @@
+---
+import Base from './Base.astro';
+
+interface Props {
+  title: string;
+  date: Date;
+  description?: string;
+}
+
+const { title, date, description } = Astro.props;
+const formattedDate = date.toLocaleDateString('en-GB', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+<Base title={title} description={description}>
+  <article>
+    <header>
+      <h1>{title}</h1>
+      <time datetime={date.toISOString()}>{formattedDate}</time>
+    </header>
+    <slot />
+  </article>
+</Base>

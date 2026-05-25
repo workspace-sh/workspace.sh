@@ -1,0 +1,82 @@
+:root {
+  --fg: #1a1a1a;
+  --bg: #fdfdfd;
+  --muted: #6a6a6a;
+  --accent: #0057ff;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fg: #ececec;
+    --bg: #121212;
+    --muted: #9a9a9a;
+    --accent: #6ea8ff;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+body {
+  margin: 0;
+  color: var(--fg);
+  background: var(--bg);
+}
+
+main {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  margin-top: 2rem;
+}
+
+p,
+ul,
+ol {
+  margin: 1rem 0;
+}
+
+a {
+  color: var(--accent);
+}
+
+time {
+  display: block;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+article header time {
+  margin-top: 0.25rem;
+}
+
+ul {
+  padding-left: 1.25rem;
+}
+
+code,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+pre {
+  padding: 1rem;
+  overflow-x: auto;
+}

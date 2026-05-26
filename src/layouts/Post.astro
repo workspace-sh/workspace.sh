@@ -10,7 +10,9 @@ interface Props {
 
 const { title, date, description, type = 'note' } = Astro.props;
 const iso = date.toISOString().slice(0, 10);
-const formatted = iso.replace(/-/g, '.');
+// DD.MM.YYYY — matches the ledger.
+const [_y, _m, _d] = iso.split('-');
+const formatted = `${_d}.${_m}.${_y}`;
 const objectLabel = { note: 'Note', image: 'Image', video: 'Video' }[type];
 ---
 <Base title={`${title} — workspace.sh`} description={description}>
@@ -27,7 +29,7 @@ const objectLabel = { note: 'Note', image: 'Image', video: 'Video' }[type];
     </div>
   </article>
   <nav class="nav">
-    <a href="/devlog/">← Devlog</a>
+    <a href="/devlog/">← Development Log</a>
     <a href="/">Home</a>
   </nav>
 </Base>

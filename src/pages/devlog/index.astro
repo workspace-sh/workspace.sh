@@ -8,6 +8,8 @@ const posts = (await getCollection('devlog', ({ data }) => !data.draft)).sort(
 
 const formatDate = (d: Date) =>
   d.toISOString().slice(0, 10).replace(/-/g, '.');
+
+const objectLabel = { note: 'Note', image: 'Image', video: 'Video' } as const;
 ---
 <Base title="Devlog — workspace.sh" description="Notes, updates, work in progress.">
   <h1 class="wordmark">Devlog</h1>
@@ -29,7 +31,7 @@ const formatDate = (d: Date) =>
           {posts.map((post, i) => (
             <tr>
               <td class="col-date">{formatDate(post.data.date)}</td>
-              <td class="col-object">Devlog</td>
+              <td class="col-object">{objectLabel[post.data.type]}</td>
               <td class="col-subject">
                 <a href={`/devlog/${post.id}/`}>{post.data.title}</a>
               </td>

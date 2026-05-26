@@ -12,7 +12,52 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+
+// Normalize a YouTube ID / URL into just the ID.
+function youtubeId(input: string | undefined): string | null {
+  if (!input) return null;
+  const idMatch = input.match(
+    /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/,
+  );
+  if (idMatch) return idMatch[1];
+  if (/^[A-Za-z0-9_-]{11}$/.test(input)) return input;
+  return null;
+}
+
+const vid = post.data.type === 'video' ? youtubeId(post.data.video) : null;
 ---
-<Post title={post.data.title} date={post.data.date} description={post.data.description}>
+<Post
+  title={post.data.title}
+  date={post.data.date}
+  description={post.data.description}
+  type={post.data.type}
+>
+  {post.data.type === 'image' && post.data.image && (
+    <figure class="post-media">
+      <img
+        src={post.data.image}
+        alt={post.data.imageAlt ?? ''}
+        loading="lazy"
+        decoding="async"
+      />
+      {post.data.description && <figcaption>{post.data.description}</figcaption>}
+    </figure>
+  )}
+
+  {post.data.type === 'video' && vid && (
+    <figure class="post-media">
+      <div class="video-embed">
+        <iframe
+          src={`https://www.youtube-nocookie.com/embed/${vid}`}
+          title={post.data.title}
+          loading="lazy"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        />
+      </div>
+      {post.data.description && <figcaption>{post.data.description}</figcaption>}
+    </figure>
+  )}
+
   <Content />
 </Post>

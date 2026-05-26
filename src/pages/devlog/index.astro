@@ -20,18 +20,20 @@ const formatDate = (d: Date) =>
         <thead>
           <tr>
             <th class="col-date">Date</th>
-            <th class="col-type">Type</th>
+            <th class="col-object">Object</th>
             <th class="col-subject">Subject</th>
+            <th class="col-control">Control</th>
           </tr>
         </thead>
         <tbody>
-          {posts.map((post) => (
+          {posts.map((post, i) => (
             <tr>
               <td class="col-date">{formatDate(post.data.date)}</td>
-              <td class="col-type">Devlog</td>
+              <td class="col-object">Devlog</td>
               <td class="col-subject">
                 <a href={`/devlog/${post.id}/`}>{post.data.title}</a>
               </td>
+              <td class="col-control">{String(posts.length - i).padStart(3, '0')}</td>
             </tr>
           ))}
         </tbody>

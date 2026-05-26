@@ -1,17 +1,23 @@
+/* workspace.sh — typographic catalog
+ * Reference DNA: typical-organization.com (tabular ledger, heavy grotesque,
+ * monochrome). Vanilla CSS, single file, no JS for layout.
+ */
+
 :root {
-  --fg: #1a1a1a;
-  --bg: #fdfdfd;
-  --muted: #6a6a6a;
-  --accent: #0057ff;
+  --fg: #000;
+  --bg: #fff;
+  --rule: #000;
+  --muted: #767676;
+  --measure: 38rem;
   color-scheme: light dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --fg: #ececec;
-    --bg: #121212;
-    --muted: #9a9a9a;
-    --accent: #6ea8ff;
+    --fg: #fff;
+    --bg: #000;
+    --rule: #fff;
+    --muted: #8a8a8a;
   }
 }
 
@@ -19,64 +25,263 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    'Segoe UI', sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
+  /* macOS gets SF Pro (incl. weight 900); other systems fall to Inter /
+   * Helvetica Neue / system-ui. No web fonts — keeps the page <2KB CSS. */
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue',
+    system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-synthesis: none;
 }
 
 body {
-  margin: 0;
-  color: var(--fg);
   background: var(--bg);
+  color: var(--fg);
+  min-height: 100vh;
+  padding: 1.25rem;
 }
 
 main {
-  max-width: 42rem;
-  margin: 0 auto;
-  padding: 2rem 1.25rem 4rem;
+  display: block;
 }
 
-h1,
-h2,
-h3 {
-  line-height: 1.2;
+/* ---------- Links ---------- */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus-visible {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.15em;
+}
+
+/* ---------- Site header / wordmark ---------- */
+.wordmark {
+  display: block;
+  font-weight: 900;
+  font-size: clamp(2.5rem, 9vw, 7rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  margin: 0 0 1.5rem;
+}
+
+.tagline {
+  font-weight: 900;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  max-width: var(--measure);
+  margin-bottom: 2rem;
+}
+
+.nav {
+  font-weight: 900;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  letter-spacing: -0.01em;
+  border-top: 1px solid var(--rule);
+  padding-top: 1rem;
+  margin-top: 3rem;
+}
+
+.nav a + a::before {
+  content: ' / ';
+  color: var(--muted);
+}
+
+/* ---------- Ledger (devlog index, future indices) ---------- */
+.ledger-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.ledger {
+  width: 100%;
+  border-collapse: collapse;
+  font-weight: 900;
+  font-size: clamp(1.25rem, 3.5vw, 2.75rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.ledger th,
+.ledger td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.4em 0.5em 0.4em 0;
+  border-right: 1px solid var(--rule);
+  white-space: nowrap;
+}
+
+.ledger th + th,
+.ledger td + td {
+  padding-left: 0.75em;
+}
+
+.ledger th:last-child,
+.ledger td:last-child {
+  border-right: none;
+}
+
+.ledger thead th {
+  padding-bottom: 0.8em;
+  font-weight: 900;
+}
+
+/* Column widths — Date narrow, Type medium, Subject takes the rest. */
+.ledger .col-date {
+  width: 1%;
+}
+
+.ledger .col-type {
+  width: 1%;
+}
+
+.ledger .col-subject {
+  width: auto;
+  white-space: normal;
+}
+
+.ledger tbody tr:hover {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.ledger tbody tr:hover a {
+  color: inherit;
+}
+
+.ledger .empty {
+  font-weight: 900;
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  padding: 2rem 0;
+  color: var(--muted);
+}
+
+/* ---------- Article (devlog post body) ---------- */
+.post {
+  max-width: var(--measure);
+  margin-top: 2.5rem;
+}
+
+.post-header {
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.post-title {
+  font-weight: 900;
+  font-size: clamp(2.25rem, 7vw, 5rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+}
+
+.post-meta {
+  font-weight: 900;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  color: var(--muted);
+}
+
+.post-meta time {
+  color: var(--fg);
+}
+
+.post-body {
+  font-weight: 400;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+}
+
+.post-body > * + * {
+  margin-top: 1rem;
+}
+
+.post-body h2 {
+  font-weight: 900;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-top: 2.5rem;
+}
+
+.post-body h3 {
+  font-weight: 900;
+  font-size: 1.25rem;
+  line-height: 1.1;
   margin-top: 2rem;
 }
 
-p,
-ul,
-ol {
-  margin: 1rem 0;
+.post-body a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
 }
 
-a {
-  color: var(--accent);
+.post-body strong {
+  font-weight: 900;
 }
 
-time {
-  display: block;
-  color: var(--muted);
-  font-size: 0.9rem;
+.post-body em {
+  font-style: italic;
 }
 
-article header time {
+.post-body ul,
+.post-body ol {
+  padding-left: 1.5rem;
+}
+
+.post-body li + li {
   margin-top: 0.25rem;
 }
 
-ul {
-  padding-left: 1.25rem;
+.post-body blockquote {
+  border-left: 2px solid var(--rule);
+  padding-left: 1rem;
+  margin-left: 0;
+  font-style: italic;
 }
 
-code,
-pre {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+.post-body code {
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+  font-size: 0.92em;
+  background: var(--fg);
+  color: var(--bg);
+  padding: 0.1em 0.35em;
 }
 
-pre {
-  padding: 1rem;
+.post-body pre {
+  background: var(--fg);
+  color: var(--bg);
+  padding: 1rem 1.25rem;
   overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.post-body pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+}
+
+.post-body hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 2rem 0;
 }

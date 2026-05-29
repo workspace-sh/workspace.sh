@@ -224,11 +224,39 @@ a:focus-visible {
   margin: 0 0 1.5rem;
 }
 
-.post-media img {
+.post-media img,
+.post-media video {
   display: block;
   width: 100%;
   height: auto;
   border: 1px solid var(--rule);
+  background: color-mix(in srgb, var(--fg) 4%, transparent);
+}
+
+/* Image gallery — single image is full width; 2+ tile in a responsive grid. */
+.post-gallery {
+  margin: 0 0 1.5rem;
+}
+
+.post-gallery .post-media {
+  margin: 0;
+}
+
+.post-gallery.is-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 0.75rem;
+}
+
+.post-body small {
+  display: block;
+  margin-top: 1.5rem;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.post-body small a {
+  color: var(--muted);
 }
 
 .post-media .video-embed {

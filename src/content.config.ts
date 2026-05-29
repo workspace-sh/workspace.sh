@@ -9,17 +9,26 @@ const devlog = defineCollection({
     description: z.string().optional(),
     draft: z.boolean().default(false),
     /**
-     * Entry kind. Drives both the Object column in the ledger and how the
-     * detail page renders.
+     * Entry kind. Drives the Object column in the ledger and the primary
+     * classification.
      *   note  — markdown body (default)
-     *   image — single image, body optional as caption
-     *   video — YouTube embed, body optional as caption
+     *   image — one or more images
+     *   video — a video (local file or YouTube)
      */
     type: z.enum(['note', 'image', 'video']).default('note'),
-    /** Path under /public or external URL. */
+
+    /** Single image — path under /public or external URL. */
     image: z.string().optional(),
     imageAlt: z.string().optional(),
-    /** YouTube video ID (e.g. "jNQXAC9IVRw") or full URL. */
+    /** Image gallery. Each entry: { src, alt? }. Rendered after any video. */
+    images: z
+      .array(z.object({ src: z.string(), alt: z.string().optional() }))
+      .optional(),
+
+    /** Local video file under /public (e.g. /devlog/clip.mp4). */
+    videoSrc: z.string().optional(),
+    videoPoster: z.string().optional(),
+    /** OR a YouTube video — ID (e.g. "jNQXAC9IVRw") or full URL. */
     video: z.string().optional(),
   }),
 });

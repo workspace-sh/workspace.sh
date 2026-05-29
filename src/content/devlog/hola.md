@@ -5,17 +5,17 @@ description: A FOSS, P2P knowledge tool. Consider this your dev log.
 type: image
 transparentMedia: true
 images:
-  - src: /devlog/canvas-writing-process.webp
+  - src: /devlog/canvas-writing-process.png
     alt: JSON Canvas on macOS — a "Writing Process" mind map branching into checking, reworking, drafting, and collecting.
-  - src: /devlog/canvas-wardley.webp
+  - src: /devlog/canvas-wardley.png
     alt: JSON Canvas on macOS — a Wardley map plotting components across value chain and evolution.
-  - src: /devlog/canvas-stakeholder.webp
+  - src: /devlog/canvas-stakeholder.png
     alt: JSON Canvas on macOS — a stakeholder mapping diagram around a central "New Product" node.
-  - src: /devlog/canvas-home-network.webp
+  - src: /devlog/canvas-home-network.png
     alt: JSON Canvas on macOS — a home network diagram linking cloud, firewall, switch, router, and devices.
-  - src: /devlog/canvas-diabetes.webp
+  - src: /devlog/canvas-diabetes.png
     alt: JSON Canvas on macOS — a "Diabetes Research" canvas with linked markdown cards arranged as an overview.
-  - src: /devlog/canvas-decorations.webp
+  - src: /devlog/canvas-decorations.png
     alt: JSON Canvas on macOS — card decoration examples, fills, gradients, and shapes.
 ---
 

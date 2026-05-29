@@ -61,7 +61,7 @@ const gallery = [
   )}
 
   {gallery.length > 0 && (
-    <div class={`post-gallery${gallery.length > 1 ? ' is-grid' : ''}`}>
+    <div class={`post-gallery${gallery.length > 1 ? ' is-grid' : ''}${d.transparentMedia ? ' is-bare' : ''}`}>
       {gallery.map((img) => (
         <figure class="post-media">
           <img src={img.src} alt={img.alt ?? ''} loading="lazy" decoding="async" />

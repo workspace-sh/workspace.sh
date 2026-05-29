@@ -25,6 +25,10 @@ const devlog = defineCollection({
       .array(z.object({ src: z.string(), alt: z.string().optional() }))
       .optional(),
 
+    /** True when this entry's images have transparent backgrounds — drops
+     *  the image border/fill so they float on the page. */
+    transparentMedia: z.boolean().default(false),
+
     /** Local video file under /public (e.g. /devlog/clip.mp4). */
     videoSrc: z.string().optional(),
     videoPoster: z.string().optional(),

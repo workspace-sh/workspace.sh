@@ -248,6 +248,13 @@ a:focus-visible {
   gap: 0.75rem;
 }
 
+/* Transparent media floats on the page — no border or fill box. */
+.post-gallery.is-bare .post-media img,
+.post-gallery.is-bare .post-media video {
+  border: none;
+  background: none;
+}
+
 .post-body small {
   display: block;
   margin-top: 1.5rem;

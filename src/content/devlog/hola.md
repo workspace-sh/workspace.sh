@@ -3,18 +3,19 @@ title: Hola a tothom
 date: 2026-05-03T18:31:10Z
 description: A FOSS, P2P knowledge tool. Consider this your dev log.
 type: image
+transparentMedia: true
 images:
-  - src: /devlog/canvas-writing-process.jpg
+  - src: /devlog/canvas-writing-process.webp
     alt: JSON Canvas on macOS — a "Writing Process" mind map branching into checking, reworking, drafting, and collecting.
-  - src: /devlog/canvas-wardley.jpg
+  - src: /devlog/canvas-wardley.webp
     alt: JSON Canvas on macOS — a Wardley map plotting components across value chain and evolution.
-  - src: /devlog/canvas-stakeholder.jpg
+  - src: /devlog/canvas-stakeholder.webp
     alt: JSON Canvas on macOS — a stakeholder mapping diagram around a central "New Product" node.
-  - src: /devlog/canvas-home-network.jpg
+  - src: /devlog/canvas-home-network.webp
     alt: JSON Canvas on macOS — a home network diagram linking cloud, firewall, switch, router, and devices.
-  - src: /devlog/canvas-diabetes.jpg
+  - src: /devlog/canvas-diabetes.webp
     alt: JSON Canvas on macOS — a "Diabetes Research" canvas with linked markdown cards arranged as an overview.
-  - src: /devlog/canvas-decorations.jpg
+  - src: /devlog/canvas-decorations.webp
     alt: JSON Canvas on macOS — card decoration examples, fills, gradients, and shapes.
 ---
 

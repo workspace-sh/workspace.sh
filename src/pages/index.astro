@@ -1,21 +1,37 @@
 ---
 import Base from '../layouts/Base.astro';
 
+// Add `dark` / `light` files under public/home/ per platform; a platform with
+// only one variant is shown as-is in both colour schemes.
 const platforms = [
   {
-    src: '/home/platform-macos.jpg',
     name: 'macOS',
-    caption: 'Rich-text tables inside a document on macOS.',
+    light: '/home/macos-markdown-light.png',
+    dark: '/home/macos-markdown-dark.png',
+    caption: 'A Markdown document, rendered natively and editable in place.',
+    bare: true,
+    width: 2820,
+    height: 1668,
   },
   {
-    src: '/home/platform-ios.jpg',
+    name: 'macOS',
+    light: '/home/macos-canvas-light.png',
+    dark: '/home/macos-canvas-dark.png',
+    caption: 'A JSON Canvas file, with a minimap.',
+    bare: true,
+    width: 2820,
+    height: 1668,
+  },
+  {
     name: 'iOS',
+    light: '/home/platform-ios-light.jpg',
     caption: 'A .table document opened on iOS.',
   },
   {
-    src: '/home/platform-linux.jpg',
     name: 'Linux',
-    caption: 'An early GTK build on Linux — blocks view.',
+    light: '/home/platform-linux-light.jpg',
+    dark: '/home/platform-linux-dark.jpg',
+    caption: 'An early GTK build on Linux.',
   },
 ];
 
@@ -84,8 +100,18 @@ const jsonLd = {
     </p>
     <div class="platforms">
       {platforms.map((p) => (
-        <figure class="platform">
-          <img src={p.src} alt={p.caption} loading="lazy" decoding="async" />
+        <figure class:list={['platform', { 'is-bare': p.bare }]}>
+          <picture>
+            {p.dark && <source srcset={p.dark} media="(prefers-color-scheme: dark)" />}
+            <img
+              src={p.light ?? p.dark}
+              alt={p.caption}
+              width={p.width}
+              height={p.height}
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
           <figcaption>
             <span class="platform-name">{p.name}</span>
             <span class="platform-caption">{p.caption}</span>

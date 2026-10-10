@@ -136,8 +136,15 @@ a:focus-visible {
 /* Platforms strip — 3-up on wide, stacks on narrow. */
 .platforms {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
-  gap: 1.5rem 1rem;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.75rem 1rem;
+}
+
+/* Two per row on wide screens, so each platform's pair sits side by side. */
+@media (min-width: 48rem) {
+  .platforms {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .platform {

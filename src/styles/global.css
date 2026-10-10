@@ -136,8 +136,8 @@ a:focus-visible {
 /* Platforms strip — 3-up on wide, stacks on narrow. */
 .platforms {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
+  gap: 1.5rem 1rem;
 }
 
 .platform {
@@ -146,12 +146,22 @@ a:focus-visible {
   flex-direction: column;
 }
 
+.platform picture {
+  display: block;
+}
+
 .platform img {
   display: block;
   width: 100%;
   height: auto;
   border: 1px solid var(--rule);
   background: color-mix(in srgb, var(--fg) 4%, transparent);
+}
+
+/* Window captures carry their own rounded corners on a transparent ground. */
+.platform.is-bare img {
+  border: none;
+  background: none;
 }
 
 .platform figcaption {

@@ -23,6 +23,15 @@ const platforms = [
     height: 1668,
   },
   {
+    name: 'iOS',
+    light: '/home/ios-table-light.png',
+    dark: '/home/ios-table-dark.png',
+    caption: 'A .table document on iOS: grid, table list and board.',
+    plain: true,
+    width: 2820,
+    height: 1940,
+  },
+  {
     name: 'Linux',
     light: '/home/platform-linux-light.jpg',
     dark: '/home/platform-linux-dark.jpg',
@@ -74,7 +83,7 @@ const jsonLd = {
       applicationCategory: 'ProductivityApplication',
       operatingSystem: 'macOS, iOS, Android, Linux',
       softwareHelp: 'https://github.com/workspace-sh',
-      image: 'https://workspace.sh/home/platform-macos.jpg',
+      image: 'https://workspace.sh/home/macos-markdown-dark.png',
       sameAs: ['https://github.com/workspace-sh', 'https://x.com/workspace_sh'],
     },
   ],
@@ -95,7 +104,7 @@ const jsonLd = {
     </p>
     <div class="platforms">
       {platforms.map((p) => (
-        <figure class:list={['platform', { 'is-bare': p.bare }]}>
+        <figure class:list={['platform', { 'is-bare': p.bare, 'is-plain': p.plain }]}>
           <picture>
             {p.dark && <source srcset={p.dark} media="(prefers-color-scheme: dark)" />}
             <img

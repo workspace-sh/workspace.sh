@@ -39,11 +39,17 @@
 }
 
 html {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
-    system-ui, sans-serif;
-  font-feature-settings: 'cv11', 'ss01', 'tnum';
+  /* Apple platforms resolve -apple-system to San Francisco; every other
+   * platform skips it and gets the self-hosted Inter. */
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue',
+    Arial, sans-serif;
+  font-feature-settings: 'tnum';
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+html.inter {
+  font-feature-settings: 'cv11', 'ss01', 'tnum';
 }
 
 body {
@@ -100,6 +106,140 @@ a:focus-visible {
   margin-top: 2.5rem;
   display: flex;
   gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* ---------- Homepage sections ---------- */
+.section {
+  margin-top: 3.5rem;
+  border-top: 1px solid var(--rule);
+  padding-top: 1.25rem;
+}
+
+.section-title {
+  font-weight: 600;
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  margin-bottom: 0.5rem;
+}
+
+.section-lede {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  max-width: var(--measure);
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+/* Platforms strip — 3-up on wide, stacks on narrow. */
+.platforms {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: 1rem;
+}
+
+.platform {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.platform img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  background: color-mix(in srgb, var(--fg) 4%, transparent);
+}
+
+.platform figcaption {
+  margin-top: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.platform-name {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.platform-caption {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+/* Open-at-the-edges list — one row per public repo. */
+.open-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.open-item {
+  border-bottom: 1px solid var(--rule);
+}
+
+.open-item a {
+  display: grid;
+  grid-template-columns: minmax(8rem, 14rem) 1fr auto;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  text-decoration: none;
+}
+
+.open-item a:hover,
+.open-item a:focus-visible {
+  text-decoration: none;
+  background: color-mix(in srgb, var(--fg) 6%, transparent);
+}
+
+.open-name {
+  font-weight: 600;
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.open-desc {
+  font-weight: 400;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.open-arrow {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--muted);
+  padding-right: 0.25rem;
+}
+
+.open-item a:hover .open-arrow,
+.open-item a:focus-visible .open-arrow {
+  color: var(--fg);
+}
+
+/* On narrow screens, stack the name/desc/arrow rather than cramming them. */
+@media (max-width: 44rem) {
+  .open-item a {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'name arrow'
+      'desc desc';
+    gap: 0.3rem 1rem;
+  }
+  .open-name { grid-area: name; }
+  .open-desc { grid-area: desc; }
+  .open-arrow { grid-area: arrow; }
 }
 
 /* ---------- Ledger (devlog index) ---------- */

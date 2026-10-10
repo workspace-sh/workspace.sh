@@ -1,14 +1,121 @@
 ---
 import Base from '../layouts/Base.astro';
+
+const platforms = [
+  {
+    src: '/home/platform-macos.jpg',
+    name: 'macOS',
+    caption: 'Rich-text tables inside a document on macOS.',
+  },
+  {
+    src: '/home/platform-ios.jpg',
+    name: 'iOS',
+    caption: 'A .table document opened on iOS.',
+  },
+  {
+    src: '/home/platform-linux.jpg',
+    name: 'Linux',
+    caption: 'An early GTK build on Linux — blocks view.',
+  },
+];
+
+const open = [
+  {
+    name: '.table',
+    description:
+      'An open data matrix file format. Runs on macOS, iOS, Linux, and the web.',
+    href: 'https://github.com/workspace-sh/table-file-format',
+  },
+  {
+    name: 'JSON Canvas',
+    description:
+      'React Native renderer (Skia), also on Linux via GTK. An open spec for infinite canvases.',
+    href: 'https://github.com/workspace-sh/react-native-jsoncanvas',
+  },
+  {
+    name: 'Workspace protocol',
+    description:
+      "The P2P (Hypercore) data layer underneath every Workspace app, across iOS, Android, macOS, Linux and the web.",
+    href: 'https://github.com/workspace-sh/workspace-p2p-spike',
+  },
+];
+
+const description =
+  'A local-first app where your files stay yours. Markdown, JSON Canvas and .table in open formats, with peer-to-peer sync.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': 'https://workspace.sh/#website',
+      url: 'https://workspace.sh/',
+      name: 'Workspace',
+      description,
+      inLanguage: 'en-GB',
+    },
+    {
+      '@type': 'SoftwareApplication',
+      '@id': 'https://workspace.sh/#app',
+      name: 'Workspace',
+      description,
+      url: 'https://workspace.sh/',
+      applicationCategory: 'ProductivityApplication',
+      operatingSystem: 'macOS, iOS, Android, Linux',
+      softwareHelp: 'https://github.com/workspace-sh',
+      image: 'https://workspace.sh/home/platform-macos.jpg',
+      sameAs: ['https://github.com/workspace-sh', 'https://x.com/workspace_sh'],
+    },
+  ],
+};
 ---
-<Base title="workspace.sh" description="Rich text, infinite canvases, and customisable tables. Local-first. Open formats.">
+<Base title="Workspace" description={description} jsonLd={jsonLd}>
   <h1 class="wordmark">Workspace</h1>
   <p class="tagline">
     Rich text, infinite canvases, and customisable tables.<br />
     Local-first.<br />
     Open formats.
   </p>
+
+  <section class="section" aria-labelledby="apps">
+    <h2 id="apps" class="section-title">Apps</h2>
+    <p class="section-lede">
+      One Workspace, three platforms. Shared views, native shells.
+    </p>
+    <div class="platforms">
+      {platforms.map((p) => (
+        <figure class="platform">
+          <img src={p.src} alt={p.caption} loading="lazy" decoding="async" />
+          <figcaption>
+            <span class="platform-name">{p.name}</span>
+            <span class="platform-caption">{p.caption}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="open">
+    <h2 id="open" class="section-title">Open at the edges</h2>
+    <p class="section-lede">
+      Most of Workspace is still being built in private. These three parts are
+      public — reuse them, or build on them.
+    </p>
+    <ul class="open-list">
+      {open.map((o) => (
+        <li class="open-item">
+          <a href={o.href}>
+            <span class="open-name">{o.name}</span>
+            <span class="open-desc">{o.description}</span>
+            <span class="open-arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
   <nav class="nav">
     <a href="/devlog/">Development Log →</a>
+    <a href="https://github.com/workspace-sh">Everything on GitHub →</a>
   </nav>
 </Base>

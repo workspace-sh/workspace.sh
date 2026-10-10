@@ -45,13 +45,20 @@ const imageUrl = new URL(image, Astro.site).href;
 
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link
-      rel="preload"
-      href="/fonts/InterVariable.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
+    <script is:inline>
+      // Apple platforms use San Francisco; everywhere else gets Inter, so only
+      // those visitors preload it and get Inter's stylistic sets.
+      if (!/Mac|iPhone|iPad|iPod/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('inter');
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.href = '/fonts/InterVariable.woff2';
+        l.as = 'font';
+        l.type = 'font/woff2';
+        l.crossOrigin = 'anonymous';
+        document.head.appendChild(l);
+      }
+    </script>
   </head>
   <body>
     <main>

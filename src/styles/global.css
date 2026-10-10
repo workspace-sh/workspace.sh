@@ -39,11 +39,17 @@
 }
 
 html {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
-    system-ui, sans-serif;
-  font-feature-settings: 'cv11', 'ss01', 'tnum';
+  /* Apple platforms resolve -apple-system to San Francisco; every other
+   * platform skips it and gets the self-hosted Inter. */
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica Neue',
+    Arial, sans-serif;
+  font-feature-settings: 'tnum';
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+html.inter {
+  font-feature-settings: 'cv11', 'ss01', 'tnum';
 }
 
 body {

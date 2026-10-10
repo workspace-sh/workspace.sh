@@ -146,6 +146,10 @@ a:focus-visible {
   flex-direction: column;
 }
 
+.platform picture {
+  display: block;
+}
+
 .platform img {
   display: block;
   width: 100%;

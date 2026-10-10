@@ -33,7 +33,14 @@ const gallery = [
   ...(d.images ?? []),
 ];
 ---
-<Post title={d.title} date={d.date} description={d.description} type={d.type}>
+<Post
+  title={d.title}
+  date={d.date}
+  description={d.description}
+  type={d.type}
+  slug={post.id}
+  image={gallery[0]?.src ?? d.videoPoster}
+>
   {d.videoSrc && (
     <figure class="post-media">
       <video

@@ -163,6 +163,11 @@ a:focus-visible {
   border-radius: 1.15% / 1.95%;
 }
 
+/* Composed strips carry their own device outlines. */
+.platform.is-plain img {
+  border: none;
+}
+
 .platform figcaption {
   margin-top: 0.6rem;
   display: flex;

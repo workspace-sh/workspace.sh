@@ -13,8 +13,26 @@ const formatDate = (d: Date) => {
 };
 
 const objectLabel = { note: 'Note', image: 'Image', video: 'Video' } as const;
+
+const description = 'Notes, updates and work in progress from the Workspace project.';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  '@id': 'https://workspace.sh/devlog/#blog',
+  url: 'https://workspace.sh/devlog/',
+  name: 'Workspace Development Log',
+  description,
+  inLanguage: 'en-GB',
+  publisher: { '@id': 'https://workspace.sh/#website' },
+  blogPost: posts.map((p) => ({
+    '@type': 'BlogPosting',
+    headline: p.data.title,
+    url: `https://workspace.sh/devlog/${p.id}/`,
+    datePublished: p.data.date.toISOString(),
+  })),
+};
 ---
-<Base title="Development Log — Workspace" description="Notes, updates, work in progress.">
+<Base title="Development Log — Workspace" description={description} jsonLd={jsonLd}>
   <h1 class="wordmark">Development Log</h1>
 
   {posts.length === 0 ? (

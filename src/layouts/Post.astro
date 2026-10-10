@@ -6,16 +6,42 @@ interface Props {
   date: Date;
   description?: string;
   type?: 'note' | 'image' | 'video';
+  image?: string;
+  slug: string;
 }
 
-const { title, date, description, type = 'note' } = Astro.props;
+const { title, date, description, type = 'note', image, slug } = Astro.props;
 const iso = date.toISOString().slice(0, 10);
 // DD.MM.YYYY — matches the ledger.
 const [_y, _m, _d] = iso.split('-');
 const formatted = `${_d}.${_m}.${_y}`;
 const objectLabel = { note: 'Note', image: 'Image', video: 'Video' }[type];
+
+const url = `https://workspace.sh/devlog/${slug}/`;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  ...(description && { description }),
+  datePublished: date.toISOString(),
+  dateModified: date.toISOString(),
+  inLanguage: 'en-GB',
+  url,
+  mainEntityOfPage: url,
+  ...(image && { image: new URL(image, 'https://workspace.sh').href }),
+  author: { '@id': 'https://workspace.sh/#website' },
+  publisher: { '@id': 'https://workspace.sh/#website' },
+  isPartOf: { '@id': 'https://workspace.sh/devlog/#blog' },
+};
 ---
-<Base title={`${title} — Workspace`} description={description}>
+<Base
+  title={`${title} — Workspace`}
+  description={description}
+  image={image}
+  ogType="article"
+  published={date}
+  jsonLd={jsonLd}
+>
   <article class="post">
     <header class="post-header">
       <h1 class="post-title">{title}</h1>

@@ -39,8 +39,37 @@ const open = [
     href: 'https://github.com/workspace-sh/workspace-p2p-spike',
   },
 ];
+
+const description =
+  'A local-first app where your files stay yours. Markdown, JSON Canvas and .table in open formats, with peer-to-peer sync.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': 'https://workspace.sh/#website',
+      url: 'https://workspace.sh/',
+      name: 'Workspace',
+      description,
+      inLanguage: 'en-GB',
+    },
+    {
+      '@type': 'SoftwareApplication',
+      '@id': 'https://workspace.sh/#app',
+      name: 'Workspace',
+      description,
+      url: 'https://workspace.sh/',
+      applicationCategory: 'ProductivityApplication',
+      operatingSystem: 'macOS, iOS, Android, Linux',
+      softwareHelp: 'https://github.com/workspace-sh',
+      image: 'https://workspace.sh/home/platform-macos.jpg',
+      sameAs: ['https://github.com/workspace-sh', 'https://x.com/workspace_sh'],
+    },
+  ],
+};
 ---
-<Base title="Workspace — local-first rich text, canvases and tables" description="Rich text, infinite canvases, and customisable tables. Local-first. Open formats.">
+<Base title="Workspace" description={description} jsonLd={jsonLd}>
   <h1 class="wordmark">Workspace</h1>
   <p class="tagline">
     Rich text, infinite canvases, and customisable tables.<br />

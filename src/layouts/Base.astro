@@ -4,9 +4,20 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  image?: string;
+  ogType?: 'website' | 'article';
+  published?: Date;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title, description } = Astro.props;
+const SITE_NAME = 'Workspace';
+const DEFAULT_IMAGE = '/home/platform-macos.jpg';
+
+const { title, description, image = DEFAULT_IMAGE, ogType = 'website', published, jsonLd } =
+  Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const imageUrl = new URL(image, Astro.site).href;
 ---
 <!doctype html>
 <html lang="en">
@@ -16,6 +27,23 @@ const { title, description } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imageUrl} />
+    {published && <meta property="article:published_time" content={published.toISOString()} />}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@workspace_sh" />
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
+    <meta name="twitter:image" content={imageUrl} />
+
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link
       rel="preload"

@@ -154,14 +154,13 @@ a:focus-visible {
   display: block;
   width: 100%;
   height: auto;
-  border: 1px solid var(--rule);
-  background: color-mix(in srgb, var(--fg) 4%, transparent);
+  border: 1px solid color-mix(in srgb, var(--fg) 20%, transparent);
 }
 
-/* Window captures carry their own rounded corners on a transparent ground. */
+/* Window captures have transparent rounded corners; the radius is a share of
+ * the image so the hairline follows the window at any size. */
 .platform.is-bare img {
-  border: none;
-  background: none;
+  border-radius: 1.15% / 1.95%;
 }
 
 .platform figcaption {

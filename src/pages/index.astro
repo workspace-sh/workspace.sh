@@ -6,9 +6,21 @@ import Base from '../layouts/Base.astro';
 const platforms = [
   {
     name: 'macOS',
-    light: '/home/platform-macos-light.jpg',
-    dark: '/home/platform-macos-dark.jpg',
-    caption: 'Rich-text tables inside a document on macOS.',
+    light: '/home/macos-markdown-light.png',
+    dark: '/home/macos-markdown-dark.png',
+    caption: 'A Markdown document, rendered natively and editable in place.',
+    bare: true,
+    width: 2820,
+    height: 1668,
+  },
+  {
+    name: 'macOS',
+    light: '/home/macos-canvas-light.png',
+    dark: '/home/macos-canvas-dark.png',
+    caption: 'A JSON Canvas file, with a minimap.',
+    bare: true,
+    width: 2820,
+    height: 1668,
   },
   {
     name: 'iOS',
@@ -88,10 +100,17 @@ const jsonLd = {
     </p>
     <div class="platforms">
       {platforms.map((p) => (
-        <figure class="platform">
+        <figure class:list={['platform', { 'is-bare': p.bare }]}>
           <picture>
             {p.dark && <source srcset={p.dark} media="(prefers-color-scheme: dark)" />}
-            <img src={p.light ?? p.dark} alt={p.caption} loading="lazy" decoding="async" />
+            <img
+              src={p.light ?? p.dark}
+              alt={p.caption}
+              width={p.width}
+              height={p.height}
+              loading="lazy"
+              decoding="async"
+            />
           </picture>
           <figcaption>
             <span class="platform-name">{p.name}</span>

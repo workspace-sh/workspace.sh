@@ -23,15 +23,10 @@ const platforms = [
     height: 1668,
   },
   {
-    name: 'iOS',
-    light: '/home/platform-ios-light.jpg',
-    caption: 'A .table document opened on iOS.',
-  },
-  {
     name: 'Linux',
     light: '/home/platform-linux-light.jpg',
     dark: '/home/platform-linux-dark.jpg',
-    caption: 'An early GTK build on Linux.',
+    caption: 'The GTK app on Linux.',
   },
 ];
 
@@ -96,7 +91,7 @@ const jsonLd = {
   <section class="section" aria-labelledby="apps">
     <h2 id="apps" class="section-title">Apps</h2>
     <p class="section-lede">
-      One Workspace, three platforms. Shared views, native shells.
+      One Workspace on macOS, iOS, Android and Linux. Shared views, native shells.
     </p>
     <div class="platforms">
       {platforms.map((p) => (

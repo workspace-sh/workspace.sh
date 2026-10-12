@@ -9,7 +9,6 @@ const platforms = [
     light: '/home/macos-markdown-light.png',
     dark: '/home/macos-markdown-dark.png',
     caption: 'A Markdown document, rendered natively and editable in place.',
-    bare: true,
     width: 2820,
     height: 1668,
   },
@@ -18,7 +17,6 @@ const platforms = [
     light: '/home/macos-canvas-light.png',
     dark: '/home/macos-canvas-dark.png',
     caption: 'A JSON Canvas file, with a minimap.',
-    bare: true,
     width: 2820,
     height: 1668,
   },
@@ -43,7 +41,6 @@ const platforms = [
     light: '/home/ios-table-light.png',
     dark: '/home/ios-table-dark.png',
     caption: 'A .table document on iOS: grid, table list and board.',
-    plain: true,
     width: 2820,
     height: 1940,
   },
@@ -114,7 +111,7 @@ const jsonLd = {
     </p>
     <div class="platforms">
       {platforms.map((p) => (
-        <figure class:list={['platform', { 'is-bare': p.bare, 'is-plain': p.plain }]}>
+        <figure class="platform">
           <picture>
             {p.dark && <source srcset={p.dark} media="(prefers-color-scheme: dark)" />}
             <img

@@ -161,18 +161,6 @@ a:focus-visible {
   display: block;
   width: 100%;
   height: auto;
-  border: 1px solid color-mix(in srgb, var(--fg) 20%, transparent);
-}
-
-/* Window captures have transparent rounded corners; the radius is a share of
- * the image so the hairline follows the window at any size. */
-.platform.is-bare img {
-  border-radius: 1.15% / 1.95%;
-}
-
-/* Composed strips carry their own device outlines. */
-.platform.is-plain img {
-  border: none;
 }
 
 .platform figcaption {
